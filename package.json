@@ -1,6 +1,6 @@
 {
-  "name": "@edx/frontend-component-footer",
-  "version": "1.0.0-semantically-released",
+  "name": "@edly-io/indigo-frontend-component-footer",
+  "version": "1.0.0",
   "description": "Footer component for use when building Open edX frontend applications",
   "main": "dist/index.js",
   "publishConfig": {
@@ -10,6 +10,7 @@
     "build": "make build",
     "i18n_extract": "fedx-scripts formatjs extract",
     "lint": "fedx-scripts eslint --ext .js --ext .jsx .",
+    "prepare": "npm run build",
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
     "test": "fedx-scripts jest --coverage"
@@ -24,14 +25,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openedx/frontend-component-footer.git"
+    "url": "git+https://github.com/edly-io/frontend-component-footer.git"
   },
   "author": "edX",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/openedx/frontend-component-footer/issues"
+    "url": "https://github.com/edly-io/frontend-component-footer/issues"
   },
-  "homepage": "https://github.com/openedx/frontend-component-footer#readme",
+  "homepage": "https://github.com/edly-io/frontend-component-footer#readme",
   "devDependencies": {
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
     "@edx/browserslist-config": "^1.1.1",
@@ -66,5 +67,11 @@
     "prop-types": "^15.5.10",
     "react": "^16.9.0 || ^17.0.0",
     "react-dom": "^16.9.0 || ^17.0.0"
+  },
+  "release": {
+    "tagFormat": "indigo-${version}",
+    "branches": [
+      "quince/indigo"
+    ]
   }
 }
