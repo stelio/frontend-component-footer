@@ -41,7 +41,7 @@ class SiteFooter extends React.Component {
         role="contentinfo"
         className="footer d-flex border-top py-3 px-4"
       >
-        <div className="container-fluid d-flex" style={{ margin: '0 auto', maxWidth: '1600px'}}>
+        <div className="container-fluid d-flex auto-margin-max-width">
           <a
             className="d-block"
             href={config.LMS_BASE_URL}
