@@ -37,24 +37,31 @@ class SiteFooter extends React.Component {
     const config = getConfig();
 
     return (
-      <div className="wrapper wrapper-footer">
-        <footer id="footer" className="tutor-container">
-          <div className="footer-top">
-            <div className="powered-area">
-              <ul className="logo-list">
-                <li>
-                  <a href={`${config.LMS_BASE_URL}/privacy`} rel="noreferrer" target="_blank">
-                    {intl.formatMessage(messages['footer.privacyPolicyLinkLabel.text'])}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <footer
+        role="contentinfo"
+        className="footer d-flex border-top py-3 px-4"
+      >
+        <div className="container-fluid d-flex" style={{ margin: '0 auto', maxWidth: '1600px'}}>
+          <a
+            className="d-block"
+            href={config.LMS_BASE_URL}
+            aria-label={intl.formatMessage(messages['footer.logo.ariaLabel'])}
+          >
+            <img
+              style={{ maxHeight: 45 }}
+              src={logo || config.LOGO_TRADEMARK_URL}
+              alt={intl.formatMessage(messages['footer.logo.altText'])}
+            />
+          </a>
+          <div className="flex-grow-1" />
           {showLanguageSelector && (
-            <LanguageSelector options={supportedLanguages} onSubmit={onLanguageSelected} />
+            <LanguageSelector
+              options={supportedLanguages}
+              onSubmit={onLanguageSelected}
+            />
           )}
-        </footer>
-      </div>
+        </div>
+      </footer>
     );
   }
 }
