@@ -4,14 +4,12 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { ensureConfig } from '@edx/frontend-platform/config';
 import { AppContext } from '@edx/frontend-platform/react';
+import { getConfig } from '@edx/frontend-platform';
 
 import messages from './Footer.messages';
 import LanguageSelector from './LanguageSelector';
 
-ensureConfig([
-  'LMS_BASE_URL',
-  'LOGO_TRADEMARK_URL',
-], 'Footer component');
+ensureConfig(['LMS_BASE_URL', 'LOGO_TRADEMARK_URL', 'PRIVACY_POLICY_URL'], 'Footer component');
 
 const EVENT_NAMES = {
   FOOTER_LINK: 'edx.bi.footer.link',
@@ -34,41 +32,29 @@ class SiteFooter extends React.Component {
   }
 
   render() {
-    const {
-      supportedLanguages,
-      onLanguageSelected,
-      logo,
-      intl,
-    } = this.props;
+    const { supportedLanguages, onLanguageSelected, intl } = this.props;
     const showLanguageSelector = supportedLanguages.length > 0 && onLanguageSelected;
-    const { config } = this.context;
+    const config = getConfig();
 
     return (
-      <footer
-        role="contentinfo"
-        className="footer d-flex border-top py-3 px-4"
-      >
-        <div className="container-fluid d-flex">
-          <a
-            className="d-block"
-            href={config.LMS_BASE_URL}
-            aria-label={intl.formatMessage(messages['footer.logo.ariaLabel'])}
-          >
-            <img
-              style={{ maxHeight: 45 }}
-              src={logo || config.LOGO_TRADEMARK_URL}
-              alt={intl.formatMessage(messages['footer.logo.altText'])}
-            />
-          </a>
-          <div className="flex-grow-1" />
+      <div className="wrapper wrapper-footer">
+        <footer id="footer" className="tutor-container">
+          <div className="footer-top">
+            <div className="powered-area">
+              <ul className="logo-list">
+                <li>
+                  <a href={`${config.LMS_BASE_URL}/privacy`} rel="noreferrer" target="_blank">
+                    {intl.formatMessage(messages['footer.privacyPolicyLinkLabel.text'])}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
           {showLanguageSelector && (
-            <LanguageSelector
-              options={supportedLanguages}
-              onSubmit={onLanguageSelected}
-            />
+            <LanguageSelector options={supportedLanguages} onSubmit={onLanguageSelected} />
           )}
-        </div>
-      </footer>
+        </footer>
+      </div>
     );
   }
 }
@@ -77,16 +63,16 @@ SiteFooter.contextType = AppContext;
 
 SiteFooter.propTypes = {
   intl: intlShape.isRequired,
-  logo: PropTypes.string,
   onLanguageSelected: PropTypes.func,
-  supportedLanguages: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })),
+  supportedLanguages: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 SiteFooter.defaultProps = {
-  logo: undefined,
   onLanguageSelected: undefined,
   supportedLanguages: [],
 };
