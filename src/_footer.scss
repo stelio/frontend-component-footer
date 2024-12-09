@@ -1,5 +1,10 @@
 $gray-footer: #fcfcfc !default;
 
 .footer {
-  background-color: $gray-footer;
+    background-color: $gray-footer;
+}
+
+.auto-margin-max-width {
+    margin: 0 auto;
+    max-width: 1600px;
 }

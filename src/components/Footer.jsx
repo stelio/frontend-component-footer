@@ -35,14 +35,14 @@ class SiteFooter extends React.Component {
   }
 
   render() {
-    const { supportedLanguages, onLanguageSelected, intl } = this.props;
+    const { supportedLanguages, onLanguageSelected, logo, intl } = this.props;
     const showLanguageSelector =
       supportedLanguages.length > 0 && onLanguageSelected;
     const config = getConfig();
 
     return (
       <footer role="contentinfo" className="footer d-flex border-top py-3 px-4">
-        <div className="container-fluid d-flex">
+        <div className="container-fluid d-flex auto-margin-max-width">
           <a
             className="d-block"
             href={config.LMS_BASE_URL}
